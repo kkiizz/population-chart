@@ -1,0 +1,44 @@
+$breakpoints: (
+    "sm": (
+        min-width: 640px,
+    ),
+    "md": (
+        min-width: 768px,
+    ),
+    "lg": (
+        min-width: 1024px,
+    ),
+    "xl": (
+        min-width: 1280px,
+    ),
+) !default;
+
+@mixin media($breakpoint: "sm") {
+    @media #{map-get($breakpoints, $breakpoint)} {
+        @content;
+    }
+}
+
+.layout-container {
+    width: 100%;
+    min-width: 330px;
+    min-height: 100vh;
+}
+
+.children-container {
+    margin: 10px;
+    background-color: rgba(138, 138, 138, 0.233);
+    @include media(md) {
+        margin: 10px 20px;
+    }
+}
+
+header {
+    width: 100%;
+    background-color: rgb(36, 36, 36);
+    padding-left: 10px;
+    color: aliceblue;
+    h1 {
+        font-size: 24px;
+    }
+}
