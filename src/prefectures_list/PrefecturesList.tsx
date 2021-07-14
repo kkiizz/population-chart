@@ -1,24 +1,30 @@
 import React, { useContext } from 'react';
-import { PrefecturesData } from '../types';
+import { PrefectureData } from '../types';
 import './PrefecturesList.scss';
-import {PrefecturesListDataContext} from '../App';
+import { CheckboxCheckerContext, PrefecturesListDataContext } from '../App';
 
 function PrefecturesList() {
-  const {prefectures_list_data, setPrefecturesListData}=useContext(
+  const { prefectures_list_data, setPrefecturesListData } = useContext(
     PrefecturesListDataContext
+  )
+  const { setCheckboxChecker } = useContext(
+    CheckboxCheckerContext
   )
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const index = Number(event.target.value)
     var _prefectures_list_data = prefectures_list_data
+
     _prefectures_list_data[index] = {
       ..._prefectures_list_data[index],
-      checked:event.target.checked
+      checked: event.target.checked
     }
-    
+
     setPrefecturesListData(
       _prefectures_list_data
     )
+
+    setCheckboxChecker(_prefectures_list_data[index])
   }
 
   return (
@@ -26,7 +32,7 @@ function PrefecturesList() {
       <p>都道府県を選択</p>
       <ul className="prefecture-list">
         {(() => {
-          const checkbox_list = prefectures_list_data.map((value,index) => {
+          const checkbox_list = prefectures_list_data.map((value, index) => {
             return (
               <li key={index}>
                 <input
@@ -48,7 +54,3 @@ function PrefecturesList() {
 }
 
 export default PrefecturesList;
-
-function PrefecturesListDataProvider(PrefecturesListDataProvider: any): { prefectures_list_data: any; setPrefecturesListData: any; } {
-  throw new Error('Function not implemented.');
-}
