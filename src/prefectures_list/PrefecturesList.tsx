@@ -1,27 +1,45 @@
-import { stringify } from 'querystring';
-import React from 'react';
+import React, { useContext } from 'react';
+import { PrefecturesData } from '../types';
 import './PrefecturesList.scss';
+import {PrefecturesListDataContext} from '../App';
 
 function PrefecturesList() {
+  const {prefectures_list_data, setPrefecturesListData}=useContext(
+    PrefecturesListDataContext
+  )
+
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const index = Number(event.target.value)
+    var _prefectures_list_data = prefectures_list_data
+    _prefectures_list_data[index] = {
+      ..._prefectures_list_data[index],
+      checked:event.target.checked
+    }
+    
+    setPrefecturesListData(
+      _prefectures_list_data
+    )
+  }
+
   return (
     <section className="prefecture-list-container">
       <p>都道府県を選択</p>
       <ul className="prefecture-list">
         {(() => {
-          //適当なデータを挿入している　要変更
-          let checkbox_list = []
-
-          for (var i=0; i<47; i++){
-            checkbox_list.push(
-              <li key={i}>
+          const checkbox_list = prefectures_list_data.map((value,index) => {
+            return (
+              <li key={index}>
                 <input
-                 type="checkbox" 
-                 name={String(i)}
+                  type="checkbox"
+                  name={value.prefName}
+                  value={index}
+                  onChange={(event) => handleCheckboxChange(event)}
                 />
-                <label htmlFor={String(i)}>和歌山県</label>
+                <label htmlFor={value.prefName}>{value.prefName}</label>
               </li>
             )
-          }
+          })
+
           return checkbox_list
         })()}
       </ul>
@@ -30,3 +48,7 @@ function PrefecturesList() {
 }
 
 export default PrefecturesList;
+
+function PrefecturesListDataProvider(PrefecturesListDataProvider: any): { prefectures_list_data: any; setPrefecturesListData: any; } {
+  throw new Error('Function not implemented.');
+}
