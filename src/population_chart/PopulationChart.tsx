@@ -15,52 +15,6 @@ import { PopulationChartData, PrefectureData, PrefecturesPopulationData } from '
 import './PopulationChart.scss';
 
 
-//適当なデータを生成して出力させてみる 後で変更
-const data = [
-  {
-    "name": "Page A",
-    "uv": 4000,
-    "pv": 2400,
-    "amt": 2400
-  },
-  {
-    "name": "Page B",
-    "uv": 3000,
-    "pv": 1398,
-    "amt": 2210
-  },
-  {
-    "name": "Page C",
-    "uv": 2000,
-    "pv": 9800,
-    "amt": 2290
-  },
-  {
-    "name": "Page D",
-    "uv": 2780,
-    "pv": 3908,
-    "amt": 2000
-  },
-  {
-    "name": "Page E",
-    "uv": 1890,
-    "pv": 4800,
-    "amt": 2181
-  },
-  {
-    "name": "Page F",
-    "uv": 2390,
-    "pv": 3800,
-    "amt": 2500
-  },
-  {
-    "name": "Page G",
-    "uv": 3490,
-    "pv": 4300,
-    "amt": 2100
-  }
-]
-
 const API_URL_POPULATION = "https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear"
 const API_KEY = process.env.REACT_APP_API_KEY || ""
 
@@ -83,6 +37,7 @@ function CreateChartData(
           type="monotone"
           dataKey={prefecture_value.prefName}
           stroke="#82ca9d"
+          strokeWidth={4}
           key={prefecture_value.prefCode}
         />
       )
@@ -175,7 +130,7 @@ function PopulationChart() {
     
     setLineList(Line_list)
     setChartData(chart_data)
-  },[population_data])
+  },[checkbox_checker, population_data])
 
 
   return (
@@ -192,7 +147,7 @@ function PopulationChart() {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
+          <XAxis dataKey="year" />
           <YAxis />
           <Tooltip />
           <Legend />
