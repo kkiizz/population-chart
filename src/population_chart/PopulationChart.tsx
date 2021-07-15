@@ -145,37 +145,39 @@ function PopulationChart() {
 
 
   return (
-    <section className="population-chart-container">
+    <section>
       <p>人口チャート</p>
-      <ResponsiveContainer>
-        <LineChart
-          data={chart_data}
-          margin={{
-            top: 30,
-            right: 60,
-            left: 20,
-            bottom: 40
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis
-            dataKey="year"
-            label={{
-              value: '年度', position: "right", offset: 20
+      <div className="population-chart-container">
+        <ResponsiveContainer>
+          <LineChart
+            data={chart_data}
+            margin={{
+              top: 30,
+              right: 60,
+              left: 20,
+              bottom: 40
             }}
-          />
-          <YAxis
-            label={{
-              value: '人口数', position: 'top', offset: 10
-            }}
-          />
-          <Tooltip
-            viewBox={{ x: 400, y: 0, width: 400, height: 400 }}
-          />
-          <Legend />
-          {Line_list}
-        </LineChart>
-      </ResponsiveContainer>
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis
+              dataKey="year"
+              label={{
+                value: '年度', position: "right", offset: 20
+              }}
+            />
+            <YAxis
+              label={{
+                value: '人口数', position: 'top', offset: 10
+              }}
+            />
+            <Tooltip
+              viewBox={{ x: 400, y: 0, width: 400, height: 400 }}
+            />
+            <Legend />
+            {Line_list}
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
     </section>
   );
 }

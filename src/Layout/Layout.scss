@@ -23,11 +23,11 @@ $breakpoints: (
     width: 100%;
     min-width: 330px;
     min-height: 100vh;
+    background-color: whitesmoke;
 }
 
 .children-container {
     margin: 10px;
-    background-color: antiquewhite;
     @include media(md) {
         margin: 10px 20px;
     }

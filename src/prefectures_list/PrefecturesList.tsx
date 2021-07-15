@@ -26,28 +26,30 @@ function PrefecturesList() {
     setCheckboxChecker(_prefectures_list_data[index])
   }
 
-  return (
-    <section className="prefecture-list-container">
-      <p>都道府県を選択</p>
-      <ul className="prefecture-list">
-        {(() => {
-          const checkbox_list = prefectures_list_data.map((value, index) => {
-            return (
-              <li key={index}>
-                <input
-                  type="checkbox"
-                  name={value.prefName}
-                  value={index}
-                  onChange={(event) => handleCheckboxChange(event)}
-                />
-                <label htmlFor={value.prefName}>{value.prefName}</label>
-              </li>
-            )
-          })
 
-          return checkbox_list
-        })()}
-      </ul>
+  return (
+    <section>
+      <div className="prefecture-list-container">
+        <p>都道府県を選択</p>
+        <ul className="prefecture-list">
+          {(() => {
+            const checkbox_list = prefectures_list_data.map((value, index) => {
+              return (
+                <li key={index}>
+                  <input
+                    type="checkbox"
+                    name={value.prefName}
+                    value={index}
+                    onChange={(event) => handleCheckboxChange(event)}
+                  />
+                  <label htmlFor={value.prefName}>{value.prefName}</label>
+                </li>
+              )
+            })
+            return checkbox_list
+          })()}
+        </ul>
+      </div>
     </section>
   );
 }
