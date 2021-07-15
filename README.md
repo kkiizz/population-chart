@@ -1,4 +1,6 @@
-# 都道府県の人口チャート（https://population-chart-coral.vercel.app/）
+# 都道府県の人口チャート
+## 公開URL
+https://population-chart-coral.vercel.app/
 ## バージョン
 1. React : 17.0.2
 2. Typescript : 4.3.5
