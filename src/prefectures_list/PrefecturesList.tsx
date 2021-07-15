@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { PrefectureData } from '../types';
 import './PrefecturesList.scss';
 import { CheckboxCheckerContext, PrefecturesListDataContext } from '../App';
 

@@ -3,7 +3,7 @@ import './App.scss';
 import Layout from './Layout/Layout';
 import PopulationChart from './population_chart/PopulationChart';
 import PrefecturesList from './prefectures_list/PrefecturesList';
-import { PrefectureData } from './types';
+import { PrefectureData, PrefecturesAPIData } from './types';
 
 
 const API_URL_PREFECTURES = "https://opendata.resas-portal.go.jp/api/v1/prefectures"
@@ -49,7 +49,13 @@ function AppProvider(props: { children: React.ReactNode }) {
       .then(res => res.json())
       .then(
         (result) => {
-          const _prefectures_list_data = result.result
+          const _prefectures_list_data = result.result.map((value:PrefecturesAPIData)=>{
+            return ({
+              ...value,
+              //要修正　falseへ
+              checked:true
+            })
+          })
           setPrefecturesListData(_prefectures_list_data)
         },
         (error) => {
