@@ -64,6 +64,6 @@ ul.prefecture-list {
 
     @include media(xl) {
         max-width: 1400px;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 1fr);
     }
 }

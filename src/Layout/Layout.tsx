@@ -1,19 +1,14 @@
 import React, { ReactNode } from 'react';
 import './Layout.scss';
 
-type Props = {
-  children: ReactNode,
-}
-
-
-function Layout({ children }: Props) {
+function Layout(props:{ children:ReactNode }) {
   return (
     <div className="layout-container">
       <header>
         <h1>都道府県別　人口チャート</h1>
       </header>
       <div className="children-container">
-        {children}
+        {props.children}
       </div>
     </div>
   );
