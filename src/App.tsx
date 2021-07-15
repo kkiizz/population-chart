@@ -52,8 +52,7 @@ function AppProvider(props: { children: React.ReactNode }) {
           const _prefectures_list_data = result.result.map((value:PrefecturesAPIData)=>{
             return ({
               ...value,
-              //要修正　falseへ
-              checked:true
+              checked:false
             })
           })
           setPrefecturesListData(_prefectures_list_data)

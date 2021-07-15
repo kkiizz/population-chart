@@ -19,24 +19,17 @@ const API_URL_POPULATION = "https://opendata.resas-portal.go.jp/api/v1/populatio
 const API_KEY = process.env.REACT_APP_API_KEY || ""
 const COLOR_LIST = [
   '#FFE4E1', '#708090', '#778899', '#696969', '#000099',
-  '#000066', '#87CEFA', '#B0C4DE', '#00008B', '#191970',
+  '#3333ff', '#003366', '#333399', '#00008B', '#191970',
   '#483D8B', '#4B0082', '#0000CD', '#7B68EE', '#4169E1',
   '#6495ED', '#008BBB', '#4682B4', '#1E90FF', '#00BFFF',
-  '#22FFFF', '#002200', '#ADD8E6', '#00FFFF', '#5F9EA0',
-  '#20B2AA', '#66CDAA', '#00CED1', '#48D1CC', '#550000',
-  '#B0E0E6', '#AFEEEE', '#6B8E23', '#556B2F', '#006400',
+  '#009999', '#006633', '#66cc00', '#3399ff', '#5F9EA0',
+  '#20B2AA', '#66CDAA', '#00CED1', '#48D1CC', '#99cc00',
+  '#00cc66', '#66cc99', '#6B8E23', '#556B2F', '#006400',
   '#228B22', '#2E8B57', '#3CB371', '#32CD32', '#9ACD32',
-  '#7FFFD4', '#00FA9A', '#00FF7F', '#7CFC00', '#7FFF00',
-  '#ADFF2F', '#90EE90', '#98FB98', '#8B008B', '#6A5ACD',
+  '#00cc66', '#669933', '#339966', '#33cc99', '#7FFF00',
+  '#6699cc', '#00cc66', '#339966', '#8B008B', '#6A5ACD',
   '#8A2BE2', '#9400D3', '#9932CC', '#BA55D3', '#9370DB',
   '#8FBC8F', '#8B0000', '#8B4513', '#A52A2A', '#B22222',
-  '#A0522D', '#CD5C5C', '#D2691E', '#BDB76B', '#DC143C',
-  '#FF1493', '#FF69B4', '#FF00FF', '#DA70D6', '#EE82EE',
-  '#DDA0DD', '#D8BfD8', '#BC8F8F', '#C71585', '#DB7093',
-  '#E9967A', '#F08080', '#FFA07A', '#FFB6C1', '#FFC0CB',
-  '#FF4500', '#FF6347', '#FF4F50', '#FA8072', '#FF8C00',
-  '#FFA500', '#F4A460', '#E6E6FA', '#B8860B', '#CD853F',
-  '#DAA520', '#D2B48C', '#DEB887', '#FFD700',
 ]
 
 
@@ -51,7 +44,7 @@ function CreateChartData(
 
   Object.entries(prefectures_list_data).forEach(([key, prefecture_value]) => {
     if (prefecture_value.checked) {
-      //Line のリスト生成　strokeの色を変えないと、同じ色のものが生成される　要変更
+      //Line のリスト生成
       return_Line_list.push(
         <Line
           type="monotone"
@@ -163,7 +156,6 @@ function PopulationChart() {
             left: 20,
             bottom: 40
           }}
-
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis
