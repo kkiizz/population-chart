@@ -1,7 +1,4 @@
 $breakpoints: (
-    "ssm": (
-        min-width: 320px,
-    ),
     "sm": (
         min-width: 640px,
     ),
@@ -53,8 +50,8 @@ ul.prefecture-list {
         }
     }
 
-    @include media(ssm) {
-        grid-template-columns: repeat(3, 1fr);
+    @include media(sm) {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     @include media(md) {
