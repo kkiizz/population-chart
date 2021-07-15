@@ -1,46 +1,41 @@
-# Getting Started with Create React App
+# 都道府県の人口チャート（SPA）
+## バージョン
+1. React : 17.0.2
+2. Typescript : 4.3.5
+3. node : 6.14.13
+4. node-sass : 6.0.1
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## API
+RESAS(地域経済分析システム、URL : https://opendata.resas-portal.go.jp/)を利用
+API詳細仕様 : https://opendata.resas-portal.go.jp/docs/api/v1/detail/index.html
 
-## Available Scripts
+## App.tsx
+### AppProvider
+次の二つを子コンポーネントに渡す
+- PrefecturesListDataContext
+都道府県の一覧をAPIから取得し、そのデータ(PrefectureData)を渡すContex
+APIの情報 : https://opendata.resas-portal.go.jp/docs/api/v1/prefectures.html
 
-In the project directory, you can run:
+- CheckboxCheckerContext
+prefectures_listで選択された都道府県のデータ（PrefectureData）
+prefectures_listで変更した値をpopulation_chartで利用するためのContext
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## population_chart
+### CreateChartData
+PrefectureData[]とPrefecturesPopulationDataを受け取り、描写データの生成とLineのJSXを生成
+チェックされている都道府県は、PrefectureData[]のcheckedで判定
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### PopulationChart
+CheckboxCheckerContextから得たcheckboxの変更情報を受け取り、まだAPIから情報を取ってきていなければfetch
+chart_dataにcheckboxで受け取った都道府県の名前がkeyとしてあれば、すでに人口の情報をAPIから取って来ていると判定
+APIの情報 : https://opendata.resas-portal.go.jp/docs/api/v1/population/composition/perYear.html
 
-### `npm test`
+## prefectures_list
+PrefectureData[]からチェックボックスを含むリストを生成
+handleCheckboxChangeでチェックボックスの変更をprefectures_list_dataへ反映
+（checkedを変更）
+都道府県の人口データを取得するために、setCheckboxCheckerへcheckedを変更した都道府県のデータを渡す
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Layout
+全体のレイアウトを調整する
