@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import './App.scss';
-import Layout from './layout/Layout';
+import Layout from './Layout/Layout';
 import PopulationChart from './population_chart/PopulationChart';
 import PrefecturesList from './prefectures_list/PrefecturesList';
 import { PrefectureData, PrefecturesAPIData } from './types';
