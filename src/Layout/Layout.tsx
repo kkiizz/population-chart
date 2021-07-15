@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import './Layout.scss';
 
-function Layout(props:{ children:ReactNode }) {
+function Layout(props: { children: ReactNode }) {
   return (
     <div className="layout-container">
       <header>

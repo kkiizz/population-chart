@@ -14,17 +14,16 @@ $breakpoints: (
 ) !default;
 
 @mixin media($breakpoint: "sm") {
-    @media #{map-get($breakpoints, $breakpoint)} {
-        @content;
-    }
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content;
+  }
 }
 
-
-.container{
+.container {
   width: 100%;
   height: 100%;
 
-  @include media(xl){
+  @include media(xl) {
     display: grid;
     padding: 10px;
     grid-gap: 10px;

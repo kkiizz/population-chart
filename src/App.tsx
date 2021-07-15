@@ -49,10 +49,10 @@ function AppProvider(props: { children: React.ReactNode }) {
       .then(res => res.json())
       .then(
         (result) => {
-          const _prefectures_list_data = result.result.map((value:PrefecturesAPIData)=>{
+          const _prefectures_list_data = result.result.map((value: PrefecturesAPIData) => {
             return ({
               ...value,
-              checked:false
+              checked: false
             })
           })
           setPrefecturesListData(_prefectures_list_data)

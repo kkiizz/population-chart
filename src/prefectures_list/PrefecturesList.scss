@@ -1,6 +1,6 @@
 $breakpoints: (
-    "ssm":(
-        min-width:320px,
+    "ssm": (
+        min-width: 320px,
     ),
     "sm": (
         min-width: 640px,
@@ -38,7 +38,6 @@ ul.prefecture-list {
     padding: 15px;
     grid-gap: 10px;
     grid-template-columns: repeat(2, 1fr);
-    
 
     li {
         list-style: none;

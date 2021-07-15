@@ -42,7 +42,8 @@ function CreateChartData(
   }
   var return_Line_list: any = []
 
-  Object.entries(prefectures_list_data).forEach(([key, prefecture_value]) => {
+  Object.entries(prefectures_list_data).forEach(([_key, prefecture_value]) => {
+    //チェックボックスにチェックが入っているものだけを処理
     if (prefecture_value.checked) {
       //Line のリスト生成
       return_Line_list.push(
@@ -57,7 +58,7 @@ function CreateChartData(
 
       //Chartの描写につかうデータを生成
       if (prefecture_value.prefName in population_data) {
-        Object.entries(population_data[prefecture_value.prefName]).forEach(([key, population_value]) => {
+        Object.entries(population_data[prefecture_value.prefName]).forEach(([_key, population_value]) => {
           if (population_value.year in pre_data) {
             pre_data[population_value.year] = {
               ...pre_data[population_value.year],
