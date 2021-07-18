@@ -28,6 +28,7 @@ $breakpoints: (
 
 .children-container {
     margin: 10px;
+    max-height: 1280px;
     @include media(md) {
         margin: 10px 20px;
     }

@@ -9,6 +9,7 @@ import { PrefectureData, PrefecturesAPIData } from './types';
 const API_URL_PREFECTURES = "https://opendata.resas-portal.go.jp/api/v1/prefectures"
 const API_KEY = process.env.REACT_APP_API_KEY || ""
 
+
 //Prefectures List Data
 export const PrefecturesListDataContext = createContext(
   {} as {
@@ -25,6 +26,14 @@ export const CheckboxCheckerContext = createContext(
   }
 )
 
+//Chartの再描写を制御　fetchが終わって、準備ができたら描写
+export const ChartChangeContext = createContext(
+  {} as {
+    chart_change: boolean,
+    setChartChange: React.Dispatch<React.SetStateAction<boolean>>
+  }
+)
+
 
 //Provider : 都道府県リスト、チェックボックスの変更データ
 function AppProvider(props: { children: React.ReactNode }) {
@@ -34,6 +43,7 @@ function AppProvider(props: { children: React.ReactNode }) {
     prefName: "北海道",
     checked: false,
   })
+  const [chart_change, setChartChange] = useState<boolean>(true)
 
   //都道府県リストのデータをAPIから受け取る
   useEffect(() => {
@@ -58,6 +68,7 @@ function AppProvider(props: { children: React.ReactNode }) {
           setPrefecturesListData(_prefectures_list_data)
         },
         (error) => {
+          window.alert("通信エラー")
           console.log(error)
         }
       )
@@ -67,7 +78,9 @@ function AppProvider(props: { children: React.ReactNode }) {
   return (
     <PrefecturesListDataContext.Provider value={{ prefectures_list_data, setPrefecturesListData }}>
       <CheckboxCheckerContext.Provider value={{ checkbox_checker, setCheckboxChecker }}>
-        {props.children}
+        <ChartChangeContext.Provider value={{ chart_change, setChartChange }}>
+          {props.children}
+        </ChartChangeContext.Provider>
       </CheckboxCheckerContext.Provider>
     </PrefecturesListDataContext.Provider>
   )

@@ -9,7 +9,9 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { CheckboxCheckerContext, PrefecturesListDataContext } from '../App';
+import { ChartChangeContext, CheckboxCheckerContext, PrefecturesListDataContext } from '../App';
+import Loading from '../loading/Loading';
+
 import { PopulationChartData, PrefectureData, PrefecturesPopulationData } from '../types';
 
 import './PopulationChart.scss';
@@ -101,6 +103,11 @@ function PopulationChart() {
   const { checkbox_checker } = useContext(
     CheckboxCheckerContext
   )
+  const { chart_change, setChartChange } = useContext(
+    ChartChangeContext
+  )
+
+
   const [population_data, setPopulationData] = useState<PrefecturesPopulationData>({})
   const [Line_list, setLineList] = useState([])
   const [chart_data, setChartData] = useState([])
@@ -127,57 +134,71 @@ function PopulationChart() {
             }
             //prefCodeの総人口をpopulation_dataに保存
             setPopulationData(_population_data)
+
+            //Chartの描写に必要な情報を生成 CreateChartDataに渡すデータは、fetchして変更した値を利用する
+            const [Line_list, chart_data] = CreateChartData(prefectures_list_data, _population_data)
+
+            setLineList(Line_list)
+            setChartData(chart_data)
+            setChartChange(true)
           },
           (error) => {
+            window.alert("通信エラー")
             console.log(error)
           }
         )
+    } else {
+      //Chartの描写に必要な情報を生成
+      const [Line_list, chart_data] = CreateChartData(prefectures_list_data, _population_data)
+
+      setLineList(Line_list)
+      setChartData(chart_data)
+      setChartChange(true)
     }
-
   }, [checkbox_checker])
-
-
-  useEffect(() => {
-    const [Line_list, chart_data] = CreateChartData(prefectures_list_data, population_data)
-
-    setLineList(Line_list)
-    setChartData(chart_data)
-  }, [checkbox_checker, population_data])
 
 
   return (
     <section>
       <p>人口チャート</p>
       <div className="population-chart-container">
-        <ResponsiveContainer>
-          <LineChart
-            data={chart_data}
-            margin={{
-              top: 30,
-              right: 60,
-              left: 20,
-              bottom: 40
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis
-              dataKey="year"
-              label={{
-                value: '年度', position: "right", offset: 20
-              }}
-            />
-            <YAxis
-              label={{
-                value: '人口数', position: 'top', offset: 10
-              }}
-            />
-            <Tooltip
-              viewBox={{ x: 400, y: 0, width: 400, height: 400 }}
-            />
-            <Legend />
-            {Line_list}
-          </LineChart>
-        </ResponsiveContainer>
+        {(() => {
+          if (chart_change) {
+            return (
+              <ResponsiveContainer>
+                <LineChart
+                  data={chart_data}
+                  margin={{
+                    top: 30,
+                    right: 60,
+                    left: 20,
+                    bottom: 40
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis
+                    dataKey="year"
+                    label={{
+                      value: '年度', position: "right", offset: 20
+                    }}
+                  />
+                  <YAxis
+                    label={{
+                      value: '人口数', position: 'top', offset: 10
+                    }}
+                  />
+                  <Tooltip
+                    viewBox={{ x: 400, y: 0, width: 400, height: 400 }}
+                  />
+                  <Legend />
+                  {Line_list}
+                </LineChart>
+              </ResponsiveContainer>
+            )
+          } else {
+            return <Loading/>
+          }
+        })()}
       </div>
     </section>
   );

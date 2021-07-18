@@ -22,5 +22,5 @@ export type PrefecturesPopulationData = {
 }
 
 export type PopulationChartData = {
-    [key: number]:{[key: string]: number}
+    [key: number]: { [key: string]: number }
 }

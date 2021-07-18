@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import './PrefecturesList.scss';
-import { CheckboxCheckerContext, PrefecturesListDataContext } from '../App';
+import { ChartChangeContext, CheckboxCheckerContext, PrefecturesListDataContext } from '../App';
 
 function PrefecturesList() {
   const { prefectures_list_data, setPrefecturesListData } = useContext(
@@ -8,6 +8,9 @@ function PrefecturesList() {
   )
   const { setCheckboxChecker } = useContext(
     CheckboxCheckerContext
+  )
+  const { setChartChange } = useContext(
+    ChartChangeContext
   )
 
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,6 +27,7 @@ function PrefecturesList() {
     )
 
     setCheckboxChecker(_prefectures_list_data[index])
+    setChartChange(false)
   }
 
 

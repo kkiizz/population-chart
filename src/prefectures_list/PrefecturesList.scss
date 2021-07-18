@@ -22,8 +22,10 @@ $breakpoints: (
 .prefecture-list-container {
     width: 100%;
     min-width: 300px;
+    max-width: 600px;
     height: auto;
     padding: 10px;
+    margin: auto;
 }
 
 ul.prefecture-list {
