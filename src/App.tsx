@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import './App.scss';
-import Layout from './layout/Layout';
+import Layout from './Layout/Layout';
 import PopulationChart from './population_chart/PopulationChart';
 import PrefecturesList from './prefectures_list/PrefecturesList';
 import { PrefectureData, PrefecturesAPIData } from './types';
@@ -25,6 +25,14 @@ export const CheckboxCheckerContext = createContext(
   }
 )
 
+//Chartの再描写を制御　fetchが終わって、準備ができたら描写
+export const ChartChangeContext = createContext(
+  {} as {
+    chart_change: boolean,
+    setChartChange: React.Dispatch<React.SetStateAction<boolean>>
+  }
+)
+
 
 //Provider : 都道府県リスト、チェックボックスの変更データ
 function AppProvider(props: { children: React.ReactNode }) {
@@ -34,6 +42,7 @@ function AppProvider(props: { children: React.ReactNode }) {
     prefName: "北海道",
     checked: false,
   })
+  const [chart_change, setChartChange] = useState<boolean>(true)
 
   //都道府県リストのデータをAPIから受け取る
   useEffect(() => {
@@ -67,7 +76,9 @@ function AppProvider(props: { children: React.ReactNode }) {
   return (
     <PrefecturesListDataContext.Provider value={{ prefectures_list_data, setPrefecturesListData }}>
       <CheckboxCheckerContext.Provider value={{ checkbox_checker, setCheckboxChecker }}>
-        {props.children}
+        <ChartChangeContext.Provider value={{ chart_change, setChartChange }}>
+          {props.children}
+        </ChartChangeContext.Provider>
       </CheckboxCheckerContext.Provider>
     </PrefecturesListDataContext.Provider>
   )
