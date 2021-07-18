@@ -9,6 +9,7 @@ import { PrefectureData, PrefecturesAPIData } from './types';
 const API_URL_PREFECTURES = "https://opendata.resas-portal.go.jp/api/v1/prefectures"
 const API_KEY = process.env.REACT_APP_API_KEY || ""
 
+
 //Prefectures List Data
 export const PrefecturesListDataContext = createContext(
   {} as {
@@ -67,6 +68,7 @@ function AppProvider(props: { children: React.ReactNode }) {
           setPrefecturesListData(_prefectures_list_data)
         },
         (error) => {
+          window.alert("通信エラー")
           console.log(error)
         }
       )

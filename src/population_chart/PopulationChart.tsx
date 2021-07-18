@@ -10,6 +10,8 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { ChartChangeContext, CheckboxCheckerContext, PrefecturesListDataContext } from '../App';
+import Loading from '../loading/Loading';
+
 import { PopulationChartData, PrefectureData, PrefecturesPopulationData } from '../types';
 
 import './PopulationChart.scss';
@@ -141,6 +143,7 @@ function PopulationChart() {
             setChartChange(true)
           },
           (error) => {
+            window.alert("通信エラー")
             console.log(error)
           }
         )
@@ -193,7 +196,7 @@ function PopulationChart() {
               </ResponsiveContainer>
             )
           } else {
-            return <h1>Loading ...</h1>
+            return <Loading/>
           }
         })()}
       </div>
